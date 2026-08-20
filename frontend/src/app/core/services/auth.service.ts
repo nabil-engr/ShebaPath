@@ -19,7 +19,7 @@ export class AuthService {
   readonly loading = computed(() => this.loadingSignal());
 
   bootstrap(): Observable<AppUser | null> {
-    return this.http.get<AppUser>(this.api.endpoint('auth/me'), { withCredentials: true }).pipe(
+    return this.http.get<AppUser | null>(this.api.endpoint('auth/me'), { withCredentials: true }).pipe(
       tap((user) => this.currentUserSignal.set(user)),
       catchError(() => {
         this.currentUserSignal.set(null);

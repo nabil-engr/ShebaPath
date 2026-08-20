@@ -1,6 +1,7 @@
 bin/
 obj/
 publish/
+.tmp/
 .vs/
 *.user
 appsettings.Local.json

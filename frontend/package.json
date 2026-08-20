@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --host 0.0.0.0 --port \"$PORT\" --serve-path \"$BASE_PATH\" --proxy-config proxy.conf.json",
+    "dev": "ng serve --host 0.0.0.0 --port 4200 --serve-path /bd-services --proxy-config proxy.conf.json",
     "build": "ng build --base-href /bd-services/",
-    "serve": "ng build --base-href \"$BASE_PATH\" --configuration development && npx http-server dist/public/browser -p \"$PORT\" -a 0.0.0.0",
+    "serve": "ng build --base-href /bd-services/ --configuration development && npx http-server dist/public/browser -p 4200 -a 0.0.0.0",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
     "watch": "ng build --watch --configuration development"
   },

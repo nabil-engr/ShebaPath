@@ -36,7 +36,14 @@
     }
   </script>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    if (!['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+      const insights = document.createElement('script');
+      insights.src = '/_vercel/insights/script.js';
+      insights.defer = true;
+      document.head.appendChild(insights);
+    }
+  </script>
   <app-root></app-root>
 </body>
 </html>

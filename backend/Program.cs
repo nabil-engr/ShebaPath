@@ -24,6 +24,13 @@ var pgPassword = Environment.GetEnvironmentVariable("PGPASSWORD")
     ?? throw new InvalidOperationException("PGPASSWORD environment variable is required.");
 var pgDatabase = Environment.GetEnvironmentVariable("PGDATABASE")
     ?? throw new InvalidOperationException("PGDATABASE environment variable is required.");
+var defaultSslMode = pgHost.Equals("localhost", StringComparison.OrdinalIgnoreCase) || pgHost == "127.0.0.1"
+    ? SslMode.Prefer
+    : SslMode.Require;
+var sslModeSetting = Environment.GetEnvironmentVariable("PGSSLMODE");
+if (!string.IsNullOrWhiteSpace(sslModeSetting)
+    && !Enum.TryParse<SslMode>(sslModeSetting, ignoreCase: true, out defaultSslMode))
+    throw new InvalidOperationException("PGSSLMODE must be Disable, Allow, Prefer, Require, VerifyCA, or VerifyFull.");
 
 var connectionStringBuilder = new NpgsqlConnectionStringBuilder
 {
@@ -32,7 +39,7 @@ var connectionStringBuilder = new NpgsqlConnectionStringBuilder
     Username = pgUser,
     Password = pgPassword,
     Database = pgDatabase,
-    SslMode = SslMode.Require,
+    SslMode = defaultSslMode,
     Timeout = 15,
     CommandTimeout = 30,
     KeepAlive = 30,
@@ -409,7 +416,7 @@ auth.MapPost("/reset-password", async (ResetPasswordRequest req, NpgsqlDataSourc
 
 auth.MapGet("/me", async (HttpContext http, NpgsqlDataSource db) =>
 {
-    if (http.User.Identity?.IsAuthenticated != true) return Unauthorized();
+    if (http.User.Identity?.IsAuthenticated != true) return Results.Ok((object?)null);
 
     var userId = int.Parse(http.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
     await using var conn = await db.OpenConnectionAsync();
@@ -417,9 +424,9 @@ auth.MapGet("/me", async (HttpContext http, NpgsqlDataSource db) =>
         "SELECT id, email, full_name, phone, created_at, is_admin FROM bd_users WHERE id = $1", conn);
     cmd.Parameters.AddWithValue(userId);
     await using var reader = await cmd.ExecuteReaderAsync();
-    if (!await reader.ReadAsync()) return Unauthorized();
+    if (!await reader.ReadAsync()) return Results.Ok((object?)null);
     return Results.Ok(ReadUser(reader));
-}).RequireAuthorization();
+});
 
 // ---------- Account ----------
 app.MapPatch($"{apiBase}/account", async (UpdateAccountRequest req, HttpContext http, NpgsqlDataSource db) =>

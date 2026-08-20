@@ -87,7 +87,8 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "allowedHosts": true
+            "allowedHosts": true,
+            "servePath": "/bd-services"
           },
           "configurations": {
             "production": {
