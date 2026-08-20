@@ -22,6 +22,7 @@ export class GuidesListPage implements OnInit {
 
   readonly guides = signal<GuideSummary[]>([]);
   readonly loading = signal(true);
+  readonly loadError = signal(false);
   readonly searchTerm = signal('');
   readonly page = signal(1);
 
@@ -51,10 +52,22 @@ export class GuidesListPage implements OnInit {
     if (initialQuery) {
       this.searchTerm.set(initialQuery);
     }
-    this.guidesService.list().subscribe((guides) => {
-      this.guides.set(guides);
-      this.loading.set(false);
-      this.translateSync.resync();
+    this.loadGuides();
+  }
+
+  loadGuides(): void {
+    this.loading.set(true);
+    this.loadError.set(false);
+    this.guidesService.list().subscribe({
+      next: (guides) => {
+        this.guides.set(guides);
+        this.loading.set(false);
+        this.translateSync.resync();
+      },
+      error: () => {
+        this.loading.set(false);
+        this.loadError.set(true);
+      },
     });
   }
 

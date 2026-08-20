@@ -25,25 +25,55 @@ export class HomePage implements OnInit {
   readonly guides = signal<GuideSummary[]>([]);
   readonly posts = signal<BlogSummary[]>([]);
   readonly heroSlides = signal<HeroSlidePublic[]>([]);
-  readonly loading = signal(true);
+  readonly guidesLoading = signal(true);
+  readonly postsLoading = signal(true);
+  readonly guidesError = signal(false);
+  readonly postsError = signal(false);
 
   readonly slideIndex = signal(0);
   readonly searchQuery = signal('');
 
   ngOnInit(): void {
-    this.heroSlidesService.list().subscribe((slides) => this.heroSlides.set(slides));
-    this.guidesService.list().subscribe((guides) => {
-      this.guides.set(guides.slice(0, 5));
-      this.translateSync.resync();
-    });
-    this.blogService.list().subscribe((posts) => {
-      this.posts.set(posts.slice(0, 4));
-      this.loading.set(false);
-      this.translateSync.resync();
-    });
+    this.heroSlidesService.list().subscribe({ next: (slides) => this.heroSlides.set(slides) });
+    this.loadGuides();
+    this.loadPosts();
 
-    const timer = setInterval(() => this.nextSlide(), 5000);
-    this.destroyRef.onDestroy(() => clearInterval(timer));
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const timer = setInterval(() => this.nextSlide(), 5000);
+      this.destroyRef.onDestroy(() => clearInterval(timer));
+    }
+  }
+
+  loadGuides(): void {
+    this.guidesLoading.set(true);
+    this.guidesError.set(false);
+    this.guidesService.list().subscribe({
+      next: (guides) => {
+        this.guides.set(guides.slice(0, 5));
+        this.guidesLoading.set(false);
+        this.translateSync.resync();
+      },
+      error: () => {
+        this.guidesLoading.set(false);
+        this.guidesError.set(true);
+      },
+    });
+  }
+
+  loadPosts(): void {
+    this.postsLoading.set(true);
+    this.postsError.set(false);
+    this.blogService.list().subscribe({
+      next: (posts) => {
+        this.posts.set(posts.slice(0, 4));
+        this.postsLoading.set(false);
+        this.translateSync.resync();
+      },
+      error: () => {
+        this.postsLoading.set(false);
+        this.postsError.set(true);
+      },
+    });
   }
 
   private get slideCount(): number {

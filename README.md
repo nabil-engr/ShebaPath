@@ -32,17 +32,20 @@ NID, birth certificate, trade licence guides + a small blog + account system).
   if you're not deploying under that sub-path
 - Run dev server with: `ng serve --proxy-config proxy.conf.json`
 
-## Known limitation (carried over from original project)
+## Production deployment
 
-Production deployment isn't fully wired — the frontend build has no
-server-side proxy to the backend out of the box. You'll need a reverse proxy
-(Nginx, IIS URL Rewrite, etc.) or to merge the API behind the same host in
-production.
+- The Angular frontend is configured for Vercel under `/bd-services/`.
+- Vercel proxies `/bd-services/api/*` to the ASP.NET Core API on Render.
+- The API reads Neon connection settings only from `PGHOST`, `PGPORT`,
+  `PGUSER`, `PGPASSWORD`, and `PGDATABASE`; secrets must never be committed.
+- `/bd-services/api/healthz` checks the API process. `/bd-services/api/readyz`
+  additionally checks database connectivity.
+- `backend/schema.sql` documents a fresh database. Never apply it or another
+  SQL file to production without a Neon backup/restore point and review.
 
 ## Setup
 
-1. Create the PostgreSQL tables (`bd_users`, `bd_guides`, `bd_blog_posts`) —
-   check `backend/` for SQL/seed scripts if present.
-2. Update the connection string / config in `backend/` (appsettings or env vars).
+1. Create a fresh PostgreSQL database from `backend/schema.sql`.
+2. Set the five `PG*` environment variables listed above.
 3. `cd backend && dotnet run`
 4. `cd frontend && npm install && ng serve --proxy-config proxy.conf.json`

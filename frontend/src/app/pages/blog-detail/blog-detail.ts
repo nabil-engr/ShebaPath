@@ -4,10 +4,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ShareButtonComponent } from '../../Shared/share-button/share-button';
 import { TagChipsComponent } from '../../Shared/tag-chips/tag-chips';
 import { switchMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { BlogService } from '../../core/services/blog.service';
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { BlogDetail } from '../../core/models/models';
-import { Meta, Title } from '@angular/platform-browser';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -21,8 +22,7 @@ export class BlogDetailPage implements OnInit {
   private readonly blogService = inject(BlogService);
   private readonly pdfExport = inject(PdfExportService);
   private readonly document = inject(DOCUMENT);
-  private readonly metaService = inject(Meta);
-  private readonly titleService = inject(Title);
+  private readonly seo = inject(SeoService);
 
   get pageUrl(): string {
     return this.document.location.href;
@@ -30,6 +30,7 @@ export class BlogDetailPage implements OnInit {
 
   readonly post = signal<BlogDetail | null>(null);
   readonly notFound = signal(false);
+  readonly loadError = signal(false);
   readonly loading = signal(true);
 
   readonly readingTime = computed(() => {
@@ -45,31 +46,20 @@ export class BlogDetailPage implements OnInit {
         next: (post) => {
           this.post.set(post);
           this.loading.set(false);
-          this.applySeoTags(post);
+          this.seo.applyBlog(post);
         },
-        error: () => {
-          this.notFound.set(true);
+        error: (error: HttpErrorResponse) => {
+          const notFound = error.status === 404;
+          this.notFound.set(notFound);
+          this.loadError.set(!notFound);
           this.loading.set(false);
+          this.seo.markUnavailable('Post', notFound);
         },
       });
   }
 
-  private applySeoTags(post: BlogDetail): void {
-    const url = this.document.location.href;
-    this.titleService.setTitle(`${post.title} — ShebaPath Blog`);
-    this.metaService.updateTag({ name: 'description', content: post.excerpt });
-
-    this.metaService.updateTag({ property: 'og:type', content: 'article' });
-    this.metaService.updateTag({ property: 'og:title', content: post.title });
-    this.metaService.updateTag({ property: 'og:description', content: post.excerpt });
-    this.metaService.updateTag({ property: 'og:url', content: url });
-    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.metaService.updateTag({ name: 'twitter:title', content: post.title });
-    this.metaService.updateTag({ name: 'twitter:description', content: post.excerpt });
-    if (post.coverImageUrl) {
-      this.metaService.updateTag({ property: 'og:image', content: post.coverImageUrl });
-      this.metaService.updateTag({ name: 'twitter:image', content: post.coverImageUrl });
-    }
+  reload(): void {
+    this.document.location.reload();
   }
 
   downloadPdf(): void {

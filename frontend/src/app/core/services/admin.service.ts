@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiBase } from './api-base';
-import { AdminGuidePayload, AdminBlogPayload, Category, DashboardStats, Tag, HeroSlide } from '../models/models';
+import { AdminGuidePayload, AdminBlogPayload, Category, DashboardStats, Tag, HeroSlide, GuideDetail, GuideSummary } from '../models/models';
 
 // Re-exported so files that import DashboardStats/Category directly from this
 // service (instead of from models.ts) still resolve correctly.
@@ -73,6 +73,14 @@ export class AdminService {
     return this.http.post<{ success: boolean }>(this.api.endpoint('admin/guides'), payload, {
       withCredentials: true,
     });
+  }
+
+  getGuides(): Observable<GuideSummary[]> {
+    return this.http.get<GuideSummary[]>(this.api.endpoint('admin/guides'), { withCredentials: true });
+  }
+
+  getGuide(slug: string): Observable<GuideDetail> {
+    return this.http.get<GuideDetail>(this.api.endpoint(`admin/guides/${slug}`), { withCredentials: true });
   }
 
   updateGuide(slug: string, payload: AdminGuidePayload): Observable<{ success: boolean }> {

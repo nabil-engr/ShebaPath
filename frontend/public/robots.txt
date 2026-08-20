@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /bd-services/
+Disallow: /bd-services/admin/
+Disallow: /bd-services/account
+Disallow: /bd-services/login
+Disallow: /bd-services/register
+Disallow: /bd-services/forgot-password
+Disallow: /bd-services/reset-password
+
+Sitemap: https://shebapath.vercel.app/bd-services/sitemap.xml

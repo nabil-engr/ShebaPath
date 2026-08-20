@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import jsPDF from 'jspdf';
+import type { jsPDF } from 'jspdf';
 import { GuideDetail, BlogDetail } from '../models/models';
 
 const BRAND_GREEN: [number, number, number] = [10, 107, 62];
@@ -12,8 +12,9 @@ const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 
 @Injectable({ providedIn: 'root' })
 export class PdfExportService {
-  exportGuide(guide: GuideDetail): void {
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  async exportGuide(guide: GuideDetail): Promise<void> {
+    const { default: JsPdf } = await import('jspdf');
+    const doc = new JsPdf({ unit: 'mm', format: 'a4' });
     let y = this.drawHeader(doc, guide.category);
 
     y = this.drawTitle(doc, guide.title, y);
@@ -41,8 +42,9 @@ export class PdfExportService {
     doc.save(`${guide.slug}-shebapath-guide.pdf`);
   }
 
-  exportBlogPost(post: BlogDetail): void {
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  async exportBlogPost(post: BlogDetail): Promise<void> {
+    const { default: JsPdf } = await import('jspdf');
+    const doc = new JsPdf({ unit: 'mm', format: 'a4' });
     let y = this.drawHeader(doc, 'Blog');
 
     y = this.drawTitle(doc, post.title, y);

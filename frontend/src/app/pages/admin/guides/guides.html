@@ -10,12 +10,13 @@
   </div>
 
   <table class="admin-table">
-    <thead><tr><th>Title</th><th>Category</th><th>Last verified</th><th></th></tr></thead>
+    <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Last verified</th><th></th></tr></thead>
     <tbody>
       @for (g of guides(); track g.slug) {
         <tr>
           <td>{{ g.title }}</td>
           <td>{{ g.category }}</td>
+          <td>{{ g.isPublished ? 'Published' : 'Draft' }}</td>
           <td>{{ g.lastVerified | date }}</td>
           <td class="row-actions">
             <a class="btn btn-outline" [routerLink]="['/admin/guides', g.slug, 'edit']">Edit</a>

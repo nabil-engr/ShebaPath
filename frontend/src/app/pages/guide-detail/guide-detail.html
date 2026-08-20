@@ -1,9 +1,15 @@
 @if (loading()) {
-  <div class="container page"><p>Loading guide…</p></div>
+  <div class="container page" aria-busy="true"><p role="status">Loading guide…</p></div>
 } @else if (notFound()) {
   <div class="container page">
     <h1>Guide not found</h1>
     <p>We couldn't find that guide. <a routerLink="/guides">Browse all guides</a>.</p>
+  </div>
+} @else if (loadError()) {
+  <div class="container page" role="alert">
+    <h1>We couldn't load this guide</h1>
+    <p>Please check your connection and try again.</p>
+    <button class="btn btn-outline" type="button" (click)="reload()">Try again</button>
   </div>
 } @else if (guide()) {
   <section class="container page">
@@ -26,6 +32,17 @@
     <p class="lede">{{ guide()!.summary }}</p>
     <p class="verified-note">✓ Last verified {{ guide()!.lastVerified | date: 'longDate' }}</p>
     <app-tag-chips [tags]="guide()!.tags" />
+
+    @if (guide()!.featuredImage) {
+      <img
+        class="featured-image"
+        [src]="guide()!.featuredImage!"
+        [alt]="guide()!.title"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    }
 
     <div class="fact-row">
       @if (guide()!.fees) {

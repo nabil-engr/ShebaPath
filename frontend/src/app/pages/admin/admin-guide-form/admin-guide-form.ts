@@ -2,7 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { GuidesService } from '../../../core/services/guides.service';
 import { AdminService } from '../../../core/services/admin.service';
 import { Category } from '../../../core/models/models';
 import { AdminNavComponent } from '../../../Shared/admin-nav/admin-nav';
@@ -25,7 +24,6 @@ export class AdminGuideFormPage implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly guidesService = inject(GuidesService);
   private readonly admin = inject(AdminService);
 
   isEdit = false;
@@ -58,7 +56,7 @@ export class AdminGuideFormPage implements OnInit {
     if (slug && slug !== 'new') {
       this.isEdit = true;
       this.form.controls.slug.disable();
-      this.guidesService.get(slug).subscribe((g) => {
+      this.admin.getGuide(slug).subscribe((g) => {
         this.form.patchValue({
           slug: g.slug,
           categoryId: g.categoryId ?? 0,
@@ -67,6 +65,11 @@ export class AdminGuideFormPage implements OnInit {
           fees: g.fees ?? '',
           processingTime: g.processingTime ?? '',
           office: g.office ?? '',
+          featuredImage: g.featuredImage ?? '',
+          keywords: g.keywords ?? '',
+          metaDescription: g.metaDescription ?? '',
+          isFeatured: g.isFeatured ?? false,
+          isPublished: g.isPublished ?? true,
           tagsText: g.tags.join(', '),
           stepsText: g.steps.join('\n'),
           requirementsText: g.requirements.join('\n'),

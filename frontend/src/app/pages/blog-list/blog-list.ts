@@ -22,6 +22,7 @@ export class BlogListPage implements OnInit {
 
   readonly posts = signal<BlogSummary[]>([]);
   readonly loading = signal(true);
+  readonly loadError = signal(false);
   readonly searchTerm = signal('');
   readonly page = signal(1);
 
@@ -43,10 +44,22 @@ export class BlogListPage implements OnInit {
   readonly pageNumbers = computed(() => Array.from({ length: this.totalPages() }, (_, i) => i + 1));
 
   ngOnInit(): void {
-    this.blogService.list().subscribe((posts) => {
-      this.posts.set(posts);
-      this.loading.set(false);
-      this.translateSync.resync();
+    this.loadPosts();
+  }
+
+  loadPosts(): void {
+    this.loading.set(true);
+    this.loadError.set(false);
+    this.blogService.list().subscribe({
+      next: (posts) => {
+        this.posts.set(posts);
+        this.loading.set(false);
+        this.translateSync.resync();
+      },
+      error: () => {
+        this.loading.set(false);
+        this.loadError.set(true);
+      },
     });
   }
 

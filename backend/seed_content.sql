@@ -1,3 +1,5 @@
+-- LEGACY SEED: retained for historical reference only. It targets the old
+-- text-category schema and MUST NOT be run against the current production DB.
 -- ShebaPath content seed — guides & blog posts
 -- Safe to re-run: uses ON CONFLICT to update existing rows instead of erroring.
 

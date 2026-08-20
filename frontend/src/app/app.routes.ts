@@ -1,20 +1,4 @@
 import { Routes } from '@angular/router';
-import { AdminLayout } from './layout/admin-layout/admin-layout';
-import { Dashboard } from './pages/admin/dashboard/dashboard';
-
-import { Guides } from './pages/admin/guides/guides';
-
-import { Blogs } from './pages/admin/blogs/blogs';
-
-import { Categories } from './pages/admin/categories/categories';
-
-import { Tags} from './pages/admin/tags/tags';
-
-import { HeroSlider } from './pages/admin/hero-slider/hero-slider';
-
-import { Settings } from './pages/admin/settings/settings';
-
-
 import { authGuard, guestGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 

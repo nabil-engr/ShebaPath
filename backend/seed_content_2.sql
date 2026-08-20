@@ -1,3 +1,5 @@
+-- LEGACY SEED: retained for historical reference only. It targets the old
+-- text-category schema and MUST NOT be run against the current production DB.
 -- Additional ShebaPath guides — safe to re-run (upserts by slug)
 
 INSERT INTO bd_guides (slug, category, title, summary, steps, requirements, fees, processing_time, office, published_at)

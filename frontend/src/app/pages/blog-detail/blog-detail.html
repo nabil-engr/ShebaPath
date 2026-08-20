@@ -1,20 +1,43 @@
 @if (loading()) {
-  <div class="container page"><p>Loading post…</p></div>
+  <div class="container page" aria-busy="true"><p role="status">Loading post…</p></div>
 } @else if (notFound()) {
   <div class="container page">
     <h1>Post not found</h1>
     <p>We couldn't find that post. <a routerLink="/blog">Back to the blog</a>.</p>
   </div>
+} @else if (loadError()) {
+  <div class="container page" role="alert">
+    <h1>We couldn't load this post</h1>
+    <p>Please check your connection and try again.</p>
+    <button class="btn btn-outline" type="button" (click)="reload()">Try again</button>
+  </div>
 } @else if (post()) {
   <article class="container page">
     <a class="back-link" routerLink="/blog">&larr; All posts</a>
     <div class="top-row">
-      <span class="date">{{ post()!.publishedAt | date: 'longDate' }}</span>
-      <button class="btn btn-outline notranslate" type="button" (click)="downloadPdf()">
-        ⬇ Download as PDF
-      </button>
+      <span class="date">
+        {{ post()!.publishedAt | date: 'longDate' }} · {{ readingTime() }} min read
+      </span>
+      <div class="action-buttons">
+        <app-share-button [title]="post()!.title" [url]="pageUrl" />
+        <button class="btn btn-outline notranslate" type="button" (click)="downloadPdf()">
+          ⬇ Download as PDF
+        </button>
+      </div>
     </div>
     <h1>{{ post()!.title }}</h1>
+    <p class="lede">{{ post()!.excerpt }}</p>
+    <app-tag-chips [tags]="post()!.tags" />
+    @if (post()!.coverImageUrl) {
+      <img
+        class="cover-image"
+        [src]="post()!.coverImageUrl!"
+        [alt]="post()!.title"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    }
     <p class="body">{{ post()!.content }}</p>
   </article>
 }

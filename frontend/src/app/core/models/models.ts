@@ -18,6 +18,8 @@ export interface GuideSummary {
   publishedAt: string;
   lastVerified: string;
   tags: string[];
+  isFeatured?: boolean;
+  isPublished?: boolean;
 }
 
 export interface GuideDetail extends GuideSummary {
