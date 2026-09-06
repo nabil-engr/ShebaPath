@@ -17,160 +17,160 @@ import { SeoService } from '../../core/services/seo.service';
 const GUIDE_FAQS: Record<string, GuideFaq[]> = {
   'bangladesh-epassport-application-guide': [
     {
-      question: 'কিভাবে ই-পাসপোর্ট আবেদন করব? (Kivabe passport korbo?)',
-      answer: 'ই-পাসপোর্ট আবেদনের জন্য প্রথমে epassport.gov.bd পোর্টালে একটি অ্যাকাউন্ট খুলুন। এরপর সঠিক জাতীয় পরিচয়পত্র (NID) বা ১৭ ডিজিটের জন্ম নিবন্ধন অনুযায়ী অনলাইন ফর্মটি পূরণ করুন, পাসপোর্ট ফি পরিশোধ করুন এবং বায়োমেট্রিক ছবি ও ফিঙ্গারপ্রিন্ট দেওয়ার জন্য নির্দিষ্ট তারিখে আঞ্চলিক পাসপোর্ট অফিসে উপস্থিত হন।'
+      question: 'How do I apply for an e-Passport online? (Kivabe e-passport korbo?)',
+      answer: 'To apply for an e-Passport, register an account on epassport.gov.bd. Fill in the online form matching your National ID (NID) or 17-digit digital birth certificate, pay the prescribed passport fee online or via bank challan, schedule an appointment, and visit your regional passport office for biometric photo and fingerprint capture.'
     },
     {
-      question: 'পাসপোর্ট করতে কি কি কাগজপত্র লাগে? (Passport e apply er jonno ki ki lagbe?)',
-      answer: 'প্রাপ্তবয়স্কদের (১৮+) ক্ষেত্রে মূল স্মার্ট কার্ড বা এনআইডি (NID) এবং আবেদন সারসংক্ষেপ (Application Summary) ও এ-চালান/ফি জমার রশিদ প্রয়োজন। ১৮ বছরের কম বয়সীদের ক্ষেত্রে অনলাইন ভেরিফাইড ১৭ ডিজিটের জন্ম নিবন্ধন সনদ এবং বাবা-মায়ের এনআইডি কপি লাগে। রিনিউ এর ক্ষেত্রে পুরাতন মূল পাসপোর্ট সাথে নিতে হবে।'
+      question: 'What documents are required for an e-Passport application? (Passport korte ki ki lagbe?)',
+      answer: 'For adults (18+), original Smart NID card, printed Application Summary, and fee payment receipt (A-Challan) are required. For minors under 18, online verified 17-digit birth certificate and parents\' NID copies are required. For passport renewal, bring your previous original passport.'
     },
     {
-      question: 'ই-পাসপোর্টের সরকারি ফি কত টাকা? (E-passport fee koto?)',
-      answer: '৪৮ পৃষ্ঠা ৫ বছর মেয়াদি পাসপোর্টের নিয়মিত ফি ৪,০২৫ টাকা এবং জরুরি ফি ৬,৩২৫ টাকা। ৪৮ পৃষ্ঠা ১০ বছর মেয়াদের জন্য নিয়মিত ৫,৭৫০ টাকা ও জরুরি ৮,০৫০ টাকা। ৬৪ পৃষ্ঠা ১০ বছর মেয়াদের জন্য নিয়মিত ৮,০৫০ টাকা ও জরুরি ১০,৩৫০ টাকা (১৫% ভ্যাট অন্তর্ভুক্ত)।'
+      question: 'What is the government fee for an e-Passport in Bangladesh? (Passport fee koto?)',
+      answer: 'For a 48-page 5-year passport, the regular fee is ৳4,025 and express fee is ৳6,325. For 48 pages 10-year validity, regular fee is ৳5,750 and express is ৳8,050. For 64 pages 10-year validity, regular fee is ৳8,050 and express is ৳10,350 (all fees include 15% VAT).'
     },
     {
-      question: 'পাসপোর্টের জন্য পুলিশ ভেরিফিকেশন কি বাধ্যতামূলক? (Police verification process)',
-      answer: 'প্রথমবার পাসপোর্ট আবেদনকারীদের ক্ষেত্রে স্থায়ী ও বর্তমান ঠিকানায় পুলিশ ভেরিফিকেশন আবশ্যক। তবে সাধারণ রি-ইস্যু বা রিনিউ এর ক্ষেত্রে যদি নাম, ঠিকানা বা তথ্যের কোন পরিবর্তন না থাকে, তবে সাধারণত পুলিশ ভেরিফিকেশনের প্রয়োজন হয় না।'
+      question: 'Is police verification mandatory for passport applications? (Police verification process)',
+      answer: 'Police verification is mandatory at permanent and present addresses for first-time applicants. For routine re-issues or renewals where name and personal information remain unchanged, police verification is usually waived.'
     },
     {
-      question: 'জরুরি প্রয়োজনে কত দিনে পাসপোর্ট পাওয়া যায়? (Super express passport delivery)',
-      answer: 'সুপার এক্সপ্রেস (Super Express) ডেলিভারিতে মাত্র ২ থেকে ৩ কর্মদিবসের মধ্যে এবং এক্সপ্রেস ডেলিভারিতে ৭ থেকে ১০ কর্মদিবসে পাসপোর্ট পাওয়া যায়। নিয়মিত (Regular) আবেদনে সময় লাগে ১৫ থেকে ২১ কর্মদিবস।'
+      question: 'How quickly can I get an emergency passport? (Super express passport delivery)',
+      answer: 'Under the Super Express delivery option, passports are issued within 2 to 3 working days. Express delivery takes 7 to 10 working days, while Regular delivery typically takes 15 to 21 working days.'
     },
     {
-      question: 'পাসপোর্ট ডেলিভারি স্ট্যাটাস চেক করবেন কিভাবে? (Passport tracking bd)',
-      answer: 'epassport.gov.bd পোর্টালে Check Status অপশনে যান। আপনার Application ID বা অনলাইন রেজিস্ট্রেশন নম্বর এবং জন্মতারিখ ইনপুট করে সহজেই পাসপোর্টের সর্বশেষ অগ্রগতি ট্র্যাক করতে পারবেন।'
+      question: 'How can I check my e-Passport delivery status online? (Passport tracking bd)',
+      answer: 'Visit epassport.gov.bd and click Check Status. Enter your Application ID or Online Registration Number (OIN) and date of birth to track the real-time processing and delivery status of your passport.'
     }
   ],
   'passport': [
     {
-      question: 'কিভাবে ই-পাসপোর্ট আবেদন করব? (Kivabe passport korbo?)',
-      answer: 'ই-পাসপোর্ট আবেদনের জন্য প্রথমে epassport.gov.bd পোর্টালে একটি অ্যাকাউন্ট খুলুন। এরপর সঠিক জাতীয় পরিচয়পত্র (NID) বা ১৭ ডিজিটের জন্ম নিবন্ধন অনুযায়ী অনলাইন ফর্মটি পূরণ করুন, পাসপোর্ট ফি পরিশোধ করুন এবং বায়োমেট্রিক ছবি ও ফিঙ্গারপ্রিন্ট দেওয়ার জন্য নির্দিষ্ট তারিখে আঞ্চলিক পাসপোর্ট অফিসে উপস্থিত হন।'
+      question: 'How do I apply for an e-Passport online? (Kivabe e-passport korbo?)',
+      answer: 'To apply for an e-Passport, register an account on epassport.gov.bd. Fill in the online form matching your National ID (NID) or 17-digit digital birth certificate, pay the prescribed passport fee online or via bank challan, schedule an appointment, and visit your regional passport office for biometric photo and fingerprint capture.'
     },
     {
-      question: 'পাসপোর্ট করতে কি কি কাগজপত্র লাগে? (Passport e apply er jonno ki ki lagbe?)',
-      answer: 'প্রাপ্তবয়স্কদের (১৮+) ক্ষেত্রে মূল স্মার্ট কার্ড বা এনআইডি (NID) এবং আবেদন সারসংক্ষেপ (Application Summary) ও এ-চালান/ফি জমার রশিদ প্রয়োজন। ১৮ বছরের কম বয়সীদের ক্ষেত্রে অনলাইন ভেরিফাইড ১৭ ডিজিটের জন্ম নিবন্ধন সনদ এবং বাবা-মায়ের এনআইডি কপি লাগে। রিনিউ এর ক্ষেত্রে পুরাতন মূল পাসপোর্ট সাথে নিতে হবে।'
+      question: 'What documents are required for an e-Passport application? (Passport korte ki ki lagbe?)',
+      answer: 'For adults (18+), original Smart NID card, printed Application Summary, and fee payment receipt (A-Challan) are required. For minors under 18, online verified 17-digit birth certificate and parents\' NID copies are required. For passport renewal, bring your previous original passport.'
     },
     {
-      question: 'ই-পাসপোর্টের সরকারি ফি কত টাকা? (E-passport fee koto?)',
-      answer: '৪৮ পৃষ্ঠা ৫ বছর মেয়াদি পাসপোর্টের নিয়মিত ফি ৪,০২৫ টাকা এবং জরুরি ফি ৬,৩২৫ টাকা। ৪৮ পৃষ্ঠা ১০ বছর মেয়াদের জন্য নিয়মিত ৫,৭৫০ টাকা ও জরুরি ৮,০৫০ টাকা। ৬৪ পৃষ্ঠা ১০ বছর মেয়াদের জন্য নিয়মিত ৮,০৫০ টাকা ও জরুরি ১০,৩৫০ টাকা (১৫% ভ্যাট অন্তর্ভুক্ত)।'
+      question: 'What is the government fee for an e-Passport in Bangladesh? (Passport fee koto?)',
+      answer: 'For a 48-page 5-year passport, the regular fee is ৳4,025 and express fee is ৳6,325. For 48 pages 10-year validity, regular fee is ৳5,750 and express is ৳8,050. For 64 pages 10-year validity, regular fee is ৳8,050 and express is ৳10,350 (including 15% VAT).'
     },
     {
-      question: 'পাসপোর্টের জন্য পুলিশ ভেরিফিকেশন কি বাধ্যতামূলক? (Police verification process)',
-      answer: 'প্রথমবার পাসপোর্ট আবেদনকারীদের ক্ষেত্রে স্থায়ী ও বর্তমান ঠিকানায় পুলিশ ভেরিফিকেশন আবশ্যক। তবে সাধারণ রি-ইস্যু বা রিনিউ এর ক্ষেত্রে যদি নাম, ঠিকানা বা তথ্যের কোন পরিবর্তন না থাকে, তবে সাধারণত পুলিশ ভেরিফিকেশনের প্রয়োজন হয় না।'
+      question: 'Is police verification mandatory for passport applications? (Police verification process)',
+      answer: 'Police verification is mandatory for first-time applicants. For standard renewals without any data changes, police verification is usually waived.'
     }
   ],
   'driving-licence-bangladesh-guide': [
     {
-      question: 'কিভাবে বিআরটিএ ড্রাইভিং লাইসেন্স করব? (Kivabe driving licence korbo?)',
-      answer: 'প্রথমে বিআরটিএ সেবা পোর্টাল (bsp.brta.gov.bd)-এ রেজিস্টার করুন। মেডিকেল সার্টিফিকেট আপলোড করে লার্নার ড্রাইভিং লাইসেন্স আবেদন ও ফি পেমেন্ট করুন। এরপর নির্ধারিত তারিখে লিখিত, মৌখিক ও প্র্যাকটিক্যাল পরীক্ষায় উত্তীর্ণ হয়ে বায়োমেট্রিক প্রদান করলেই স্মার্ট কার্ড লাইসেন্স পেয়ে যাবেন।'
+      question: 'How do I apply for a BRTA driving licence? (Kivabe driving licence korbo?)',
+      answer: 'First register an account on the BRTA Service Portal (bsp.brta.gov.bd). Upload your medical certificate (Form Medical-1) and apply for a Learner Driving Licence with online fee payment. Next, appear for the written, oral, and practical field test on your assigned date, submit biometrics, and receive your Smart Card Driving Licence.'
     },
     {
-      question: 'ড্রাইভিং লাইসেন্স করতে কি কি লাগে? (Driving licence requirements bd)',
-      answer: 'ন্যূনতম অষ্টম শ্রেণি/জেএসসি পাসের সনদ, নিবন্ধিত ডাক্তারের স্বাক্ষরিত মেডিকেল সার্টিফিকেট (Medical-1 ফর্ম), মূল জাতীয় পরিচয়পত্র (NID), পাসপোর্ট সাইজ ছবি এবং পেশাদার লাইসেন্সের ক্ষেত্রে পুলিশ ক্লিয়ারেন্স সার্টিফিকেট প্রয়োজন।'
+      question: 'What documents are required for a driving licence in Bangladesh?',
+      answer: 'Educational certificate (minimum Grade 8 / JSC pass), medical fitness certificate signed by a registered physician, original NID card, passport-size photos, and a police verification clearance certificate for professional category licences.'
     },
     {
-      question: 'বিআরটিএ ড্রাইভিং লাইসেন্সের সরকারি ফি কত? (BRTA driving licence fees)',
-      answer: 'লার্নার ফি ৩৪৫ টাকা (একটি ক্যাটাগরি) বা ৫১৮ টাকা (মোটরসাইকেল + গাড়ি)। অপেশাদার স্মার্ট কার্ড লাইসেন্স (১০ বছর মেয়াদ) ৪,৫৫৭ টাকা এবং পেশাদার লাইসেন্স (৫ বছর মেয়াদ) ২,৮৩২ টাকা (ডাক মাশুল ও ১৫% ভ্যাটসহ)।'
+      question: 'What are the government fees for a BRTA driving licence? (BRTA fees)',
+      answer: 'Learner licence fee is ৳345 for single category (bike or car) or ৳518 for both. Non-professional smart card licence (10-year validity) is ৳4,557 and professional licence (5-year validity) is ৳2,832 including postal and 15% VAT.'
     },
     {
-      question: 'ড্রাইভিং টেস্ট ও ফিল্ড পরীক্ষা কিভাবে হয়? (Driving test rules bd)',
-      answer: 'পরীক্ষার দিনে প্রথমে ট্রাফিক সাইন ও রোড নিয়মের ওপর লিখিত পরীক্ষা হয়, এরপর ইঞ্জিন মেকানিক্সের মৌখিক পরীক্ষা এবং শেষে মাঠের মধ্যে আঁকাবাঁকা জিকজ্যাক (Zigzag) ট্র্যাক, রিভার্স পার্কিং ও স্লোপ/র‍্যাম্প টেস্ট নেওয়া হয়।'
+      question: 'How is the BRTA driving exam and field test conducted? (Driving test rules bd)',
+      answer: 'On test day, candidates take a written test on traffic signs and road safety, followed by an oral viva on vehicle mechanics, and finally a practical field driving test including zigzag obstacle tracks, reverse parking, and gradient slope tests.'
     }
   ],
   'driving-licence': [
     {
-      question: 'কিভাবে বিআরটিএ ড্রাইভিং লাইসেন্স করব? (Kivabe driving licence korbo?)',
-      answer: 'প্রথমে বিআরটিএ সেবা পোর্টাল (bsp.brta.gov.bd)-এ রেজিস্টার করুন। মেডিকেল সার্টিফিকেট আপলোড করে লার্নার ড্রাইভিং লাইসেন্স আবেদন ও ফি পেমেন্ট করুন। এরপর নির্ধারিত তারিখে লিখিত, মৌখিক ও প্র্যাকটিক্যাল পরীক্ষায় উত্তীর্ণ হয়ে বায়োমেট্রিক প্রদান করলেই স্মার্ট কার্ড লাইসেন্স পেয়ে যাবেন।'
+      question: 'How do I apply for a BRTA driving licence? (Kivabe driving licence korbo?)',
+      answer: 'Register on the BRTA Service Portal (bsp.brta.gov.bd), upload your medical certificate, apply for a Learner Driving Licence online, pass the written, oral, and field tests, and provide biometrics for your smart card.'
     },
     {
-      question: 'ড্রাইভিং লাইসেন্স করতে কি কি লাগে? (Driving licence requirements bd)',
-      answer: 'ন্যূনতম অষ্টম শ্রেণি/জেএসসি পাসের সনদ, নিবন্ধিত ডাক্তারের স্বাক্ষরিত মেডিকেল সার্টিফিকেট (Medical-1 ফর্ম), মূল জাতীয় পরিচয়পত্র (NID), পাসপোর্ট সাইজ ছবি এবং পেশাদার লাইসেন্সের ক্ষেত্রে পুলিশ ক্লিয়ারেন্স সার্টিফিকেট প্রয়োজন।'
+      question: 'What documents are required for a driving licence in Bangladesh?',
+      answer: 'Minimum Grade 8 / JSC certificate, medical fitness certificate signed by a registered doctor, original NID card, and passport-size photographs.'
     },
     {
-      question: 'বিআরটিএ ড্রাইভিং লাইসেন্সের সরকারি ফি কত? (BRTA driving licence fees)',
-      answer: 'লার্নার ফি ৩৪৫ টাকা (একটি ক্যাটাগরি) বা ৫১৮ টাকা (মোটরসাইকেল + গাড়ি)। অপেশাদার স্মার্ট কার্ড লাইসেন্স (১০ বছর মেয়াদ) ৪,৫৫৭ টাকা এবং পেশাদার লাইসেন্স (৫ বছর মেয়াদ) ২,৮৩২ টাকা।'
+      question: 'What are the government fees for a BRTA driving licence? (BRTA fees)',
+      answer: 'Learner fee is ৳345 (single category) or ৳518 (bike + car). Non-professional licence is ৳4,557 and professional licence is ৳2,832.'
     }
   ],
   'nid-correction-smart-card-reissue': [
     {
-      question: 'অনলাইনে ভোটার আইডি বা এনআইডি সংশোধন কিভাবে করব? (Kivabe NID shongshodhon korbo?)',
-      answer: 'নির্বাচন কমিশনের services.nidw.gov.bd ওয়েবসাইটে যান। এনআইডি নম্বর ও জন্মতারিখ দিয়ে একাউন্ট খুলে NID Wallet অ্যাপের মাধ্যমে ফেস ভেরিফিকেশন সম্পন্ন করুন। এরপর প্রোফাইল এডিটে গিয়ে প্রয়োজনীয় তথ্য সংশোধন, ফি প্রদান এবং প্রমাণস্বরূপ কাগজপত্র আপলোড করে সাবমিট করুন।'
+      question: 'How do I correct errors on my National ID (NID) online? (NID shongshodhon)',
+      answer: 'Visit services.nidw.gov.bd, create an account using your NID number and date of birth, and complete biometric face verification via the official NID Wallet mobile app. Edit the required fields in your profile, pay the government fee via mobile banking, upload documentary proof, and submit the application.'
     },
     {
-      question: 'এনআইডি কার্ডে নাম ও জন্মতারিখ সংশোধনে কি কি প্রমাণপত্র লাগে? (NID correction documents)',
-      answer: 'এসএসসি/সমমানের শিক্ষাগত সনদ, অনলাইন ডিজিটাল জন্ম নিবন্ধন সনদ, পাসপোর্ট বা ড্রাইভিং লাইসেন্স। পিতা-মাতার নাম সংশোধনের ক্ষেত্রে তাদের এনআইডি কপি অথবা ওয়ারিশান সনদ প্রয়োজন।'
+      question: 'What documents are needed to correct name and date of birth on NID?',
+      answer: 'SSC/educational certificate, 17-digit digital birth registration certificate, passport, or driving licence. For correcting parents\' names, certified copies of parents\' NID or inheritance certificates are required.'
     },
     {
-      question: 'এনআইডি কার্ড সংশোধনের সরকারি ফি কত? (NID correction fees)',
-      answer: 'প্রথমবার সংশোধনের জন্য ২৩০ টাকা (২০০ টাকা + ১৫% ভ্যাট), দ্বিতীয়বার ৩৪৫ টাকা এবং পরবর্তী প্রতিবার ৫৭৫ টাকা। হারিয়ে যাওয়া কার্ড উত্তোলনে নিয়মিত ২৩০ টাকা এবং জরুরি ৩৪৫ টাকা।'
+      question: 'What is the government fee for NID correction? (NID correction fees)',
+      answer: 'First correction fee is ৳230 (৳200 + 15% VAT), second correction is ৳345, and subsequent corrections are ৳575. Reissuing a lost card costs ৳230 for regular delivery and ৳345 for urgent delivery.'
     }
   ],
   'national-id': [
     {
-      question: 'অনলাইনে ভোটার আইডি বা এনআইডি সংশোধন কিভাবে করব? (Kivabe NID shongshodhon korbo?)',
-      answer: 'নির্বাচন কমিশনের services.nidw.gov.bd ওয়েবসাইটে যান। এনআইডি নম্বর ও জন্মতারিখ দিয়ে একাউন্ট খুলে NID Wallet অ্যাপের মাধ্যমে ফেস ভেরিফিকেশন সম্পন্ন করুন। এরপর প্রোফাইল এডিটে গিয়ে প্রয়োজনীয় তথ্য সংশোধন, ফি প্রদান এবং প্রমাণস্বরূপ কাগজপত্র আপলোড করে সাবমিট করুন।'
+      question: 'How do I correct errors on my National ID (NID) online? (NID shongshodhon)',
+      answer: 'Visit services.nidw.gov.bd, create an account using your NID number, verify your face using the NID Wallet mobile app, modify your profile details, pay the fee, and upload proof documents.'
     },
     {
-      question: 'এনআইডি কার্ডে নাম ও জন্মতারিখ সংশোধনে কি কি প্রমাণপত্র লাগে? (NID correction documents)',
-      answer: 'এসএসসি/সমমানের শিক্ষাগত সনদ, অনলাইন ডিজিটাল জন্ম নিবন্ধন সনদ, পাসপোর্ট বা ড্রাইভিং লাইসেন্স।'
+      question: 'What documents are needed to correct name and date of birth on NID?',
+      answer: 'SSC/board educational certificate, 17-digit digital birth registration certificate, passport, or driving licence.'
     },
     {
-      question: 'এনআইডি কার্ড সংশোধনের সরকারি ফি কত? (NID correction fees)',
-      answer: 'প্রথমবার সংশোধনের জন্য ২৩০ টাকা (২০০ টাকা + ১৫% ভ্যাট), দ্বিতীয়বার ৩৪৫ টাকা এবং পরবর্তী প্রতিবার ৫৭৫ টাকা।'
+      question: 'What is the government fee for NID correction? (NID correction fees)',
+      answer: 'First correction fee is ৳230 (৳200 + 15% VAT), second correction is ৳345, and subsequent corrections are ৳575.'
     }
   ],
   'online-birth-registration-bdris': [
     {
-      question: 'অনলাইনে নতুন জন্ম নিবন্ধন কিভাবে করব? (Online birth registration application)',
-      answer: 'bdris.gov.bd ওয়েবসাইটে গিয়ে নতুন জন্ম নিবন্ধনের জন্য আবেদন নির্বাচন করুন। ইউনিয়ন পরিষদ বা সিটি কর্পোরেশন জোন সিলেক্ট করে বাংলা ও ইংরেজিতে তথ্য পূরণ করুন, ইপিআই টিকা কার্ড বা হাসপাতালের ছাড়পত্র আপলোড করুন এবং প্রিন্ট কপি নিয়ে ১৫ দিনের মধ্যে স্থানীয় কার্যালয়ে জমা দিন।'
+      question: 'How do I apply for a new birth registration online? (Online birth certificate)',
+      answer: 'Go to bdris.gov.bd and select Application for New Birth Registration. Choose your Union Parishad or City Corporation Zone, fill in the applicant and parental details in both Bengali and English, upload the EPI vaccination card or hospital discharge certificate, and submit the printed application within 15 days to your local office.'
     },
     {
-      question: 'জন্ম নিবন্ধনের সরকারি ফি কত টাকা? (Birth certificate registration fees)',
-      answer: 'শিশুর জন্মের ৪৫ দিনের মধ্যে সম্পূর্ণ বিনামূল্যে। ৪৬ দিন থেকে ৫ বছর পর্যন্ত ২৫ টাকা। ৫ বছরের বেশি বয়সের ক্ষেত্রে ৫০ টাকা। ইংরেজি ভার্সন প্রতিলিপি ফি ৫০ টাকা এবং সংশোধন ফি ১০০ টাকা।'
+      question: 'What is the official fee for birth registration in Bangladesh?',
+      answer: 'Registration is completely free within 45 days of birth. From 46 days to 5 years of age, the fee is ৳25. For applicants over 5 years old, the fee is ৳50. English version copy fee is ৳50 and correction fee is ৳100.'
     },
     {
-      question: '১৭ ডিজিটের ডিজিটাল জন্ম নিবন্ধন সনদ কেন প্রয়োজন? (17 digit birth certificate)',
-      answer: 'ই-পাসপোর্ট আবেদন, স্কুলে ভর্তি, এনআইডি তৈরি, বিবাহ নিবন্ধন এবং সরকারি যে কোনো সেবায় ১৭ ডিজিটের অনলাইন ডিজিটাল জন্ম নিবন্ধন সনদ বাধ্যতামূলক।'
+      question: 'Why is a 17-digit digital birth registration certificate required?',
+      answer: 'A 17-digit online digital birth registration certificate is mandatory for e-Passport applications, school admissions, obtaining a National ID card, marriage registration, and official citizen services across Bangladesh.'
     }
   ],
   'birth-certificate': [
     {
-      question: 'অনলাইনে নতুন জন্ম নিবন্ধন কিভাবে করব? (Online birth registration application)',
-      answer: 'bdris.gov.bd ওয়েবসাইটে গিয়ে নতুন জন্ম নিবন্ধনের জন্য আবেদন নির্বাচন করুন। ইউনিয়ন পরিষদ বা সিটি কর্পোরেশন জোন সিলেক্ট করে বাংলা ও ইংরেজিতে তথ্য পূরণ করুন, ইপিআই টিকা কার্ড বা হাসপাতালের ছাড়পত্র আপলোড করুন এবং প্রিন্ট কপি নিয়ে ১৫ দিনের মধ্যে স্থানীয় কার্যালয়ে জমা দিন।'
+      question: 'How do I apply for a new birth registration online? (Online birth certificate)',
+      answer: 'Visit bdris.gov.bd, select Application for New Birth Registration, fill in details in Bengali and English, upload vaccination/hospital proof, and submit the printed copy to your local Union Parishad or City Corporation office.'
     },
     {
-      question: 'জন্ম নিবন্ধনের সরকারি ফি কত টাকা? (Birth certificate registration fees)',
-      answer: 'শিশুর জন্মের ৪৫ দিনের মধ্যে সম্পূর্ণ বিনামূল্যে। ৪৬ দিন থেকে ৫ বছর পর্যন্ত ২৫ টাকা। ৫ বছরের বেশি বয়সের ক্ষেত্রে ৫০ টাকা।'
+      question: 'What is the official fee for birth registration in Bangladesh?',
+      answer: 'Completely free within 45 days of birth. ৳25 for ages 46 days to 5 years, and ৳50 for applicants over 5 years old.'
     }
   ],
   'e-namjari-land-mutation-online': [
     {
-      question: 'ই-নামজারি (মিউটেশন) আবেদন কিভাবে করবেন? (e-Namjari land mutation process)',
-      answer: 'mutation.land.gov.bd পোর্টালে গিয়ে এনআইডি দিয়ে আবেদন করুন। জমির মৌজা, খতিয়ান ও দাগ নম্বর দিন, মূল দলিল, বায়া দলিল ও হালনাগাদ ভূমি উন্নয়ন কর (খাজনা) রশিদ আপলোড করুন। প্রারম্ভিক কোর্ট ফি ও নোটিশ ফি (৭০ টাকা) মোবাইল ব্যাংকিংয়ে পরিশোধ করুন।'
+      question: 'How do I apply for online land mutation (e-Namjari)? (Land mutation process)',
+      answer: 'Visit mutation.land.gov.bd and log in using your NID. Enter land mouza, khatian, and dag numbers, and upload the original purchase deed, via deed, and latest land development tax (Khajna) payment receipt. Pay the initial court fee and notice fee (৳70) through mobile banking.'
     },
     {
-      question: 'নামজারি করতে সরকারি ফি মোট কত টাকা? (Namjari total government fee)',
-      answer: 'সর্বমোট সরকারি ফি ১,১৭০ টাকা (কোর্ট ফি ২০ টাকা, নোটিশ জারি ফি ৫০ টাকা, রেকর্ড সংশোধন ফি ১,০০০ টাকা এবং খতিয়ান ফি ১০০ টাকা)। এটি সম্পূর্ণ অনলাইনে পরিশোধ করতে হয়, কোনো অতিরিক্ত ক্যাশ টাকা দেওয়ার নিয়ম নেই।'
+      question: 'What is the total government fee for e-Namjari land mutation in Bangladesh?',
+      answer: 'The total official government fee is ৳1,170 (Court fee ৳20, Notice service fee ৳50, Record correction fee ৳1,000, and Khatian fee ৳100). All fees are payable strictly online without any cash handling.'
     }
   ],
   'e-trade-license-bangladesh-online': [
     {
-      question: 'অনলাইনে ই-ট্রেড লাইসেন্স কিভাবে পাব? (Online trade license apply process)',
-      answer: 'সংশ্লিষ্ট সিটি কর্পোরেশন (যেমন etradelicense.dncc.gov.bd) বা পৌরসভা পোর্টালে লগইন করুন। ব্যবসার ধরন ও ঠিকানা নির্বাচন করুন, দোকান/অফিস ভাড়ার চুক্তিপত্র, টিন সার্টিফিকেট ও এনআইডি আপলোড করে ফি পরিশোধ করলেই কিউআর কোডযুক্ত ডিজিটাল ট্রেড লাইসেন্স ডাউনলোড করা যায়।'
+      question: 'How do I get an e-Trade License online? (Online trade license apply process)',
+      answer: 'Log into your relevant City Corporation (e.g., etradelicense.dncc.gov.bd) or Municipality portal. Select business category and location, upload rental agreement, e-TIN certificate, and NID card, and pay the assessed fees online to instantly download the QR-code verified digital trade license.'
     },
     {
-      question: 'ট্রেড লাইসেন্স করতে কি কি লাগে? (Trade license required documents)',
-      answer: 'উদ্যোক্তার জাতীয় পরিচয়পত্র (NID), পাসপোর্ট সাইজ ছবি, বাণিজ্যিক ভাড়ার চুক্তিপত্র বা জায়গার মালিকানার ট্যাক্স রশিদ, এবং ই-টিন (e-TIN) সার্টিফিকেট।'
+      question: 'What documents are required to obtain a trade license in Bangladesh?',
+      answer: 'Entrepreneur\'s National ID (NID), passport-size photographs, commercial premises rental deed or holding tax receipt, and an e-TIN certificate.'
     }
   ],
   'nbr-online-income-tax-return-filing': [
     {
-      question: 'অনলাইনে ইনকাম ট্যাক্স রিটার্ন (e-Return) কিভাবে দাখিল করব? (Online tax return filing etaxnbr)',
-      answer: 'etaxnbr.gov.bd পোর্টালে গিয়ে ১২ ডিজিটের ই-টিন (e-TIN) এবং বায়োমেট্রিক সিম দিয়ে সাইন-আপ করুন। আপনার বার্ষিক বেতন ও অন্যান্য আয়ের তথ্য এবং সম্পদ বিবরণী দিন। সিস্টেম স্বয়ংক্রিয়ভাবে কর হিসাব করবে; কর প্রযোজ্য হলে অনলাইনে পরিশোধ করে তাৎক্ষণিক প্রাপ্তিস্বীকার পত্র ও ট্যাক্স সার্টিফিকেট ডাউনলোড করুন।'
+      question: 'How do I submit an online income tax return (e-Return)? (etaxnbr filing)',
+      answer: 'Visit etaxnbr.gov.bd and register using your 12-digit e-TIN and biometric SIM. Enter your annual salary, business or investment income, and statement of assets. The system computes tax liabilities automatically. If tax is due, pay online to immediately download your tax acknowledgment receipt and certificate.'
     },
     {
-      question: 'শূন্য রিটার্ন (Zero Return) কি এবং কেন দাখিল করতে হয়? (Zero tax return bangladesh)',
-      answer: 'করমুক্ত আয়ের সীমার (পুরুষ ৩.৫ লাখ, নারী ৪ লাখ) নিচে আয় থাকলে কোনো কর দিতে হয় না, তবে পিএসআর (PSR) সনদ পাওয়ার জন্য অনলাইনে রিটার্ন সাবমিট করতে হয়। এটিই শূন্য রিটার্ন এবং এটি তৈরি করতে মাত্র ৫–১০ মিনিট সময় লাগে।'
+      question: 'What is a Zero Tax Return (Zero Return) and why should I file it?',
+      answer: 'If your annual income falls below the taxable threshold (৳3.5 lakh for men, ৳4 lakh for women), no tax is payable, but filing an online return is mandatory to obtain a Proof of Submission of Return (PSR) certificate. Filing a zero return online takes only 5 to 10 minutes.'
     }
   ]
 };

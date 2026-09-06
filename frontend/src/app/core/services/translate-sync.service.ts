@@ -12,17 +12,19 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root'})
 export class TranslateSyncService {
   resync(): void {
-    const isBangla = document.cookie.includes('googletrans=/en/bn');
+    const isBangla = document.cookie.includes('googtrans=/en/bn');
     if(!isBangla) return;
 
-    //let angular finish painting the new content first
-    setTimeout(()=> {
+    const trigger = () => {
       const combo = document.querySelector<HTMLSelectElement>('select.goog-te-combo');
       if (combo) {
+        combo.value = 'bn';
         combo.dispatchEvent(new Event('change'));
       }
-    },150);
+    };
 
-
+    // Trigger after Angular painted the template
+    setTimeout(trigger, 100);
+    setTimeout(trigger, 350);
   }
 }
