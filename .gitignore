@@ -1,1 +1,15 @@
 node_modules
+node_modules/
+*/node_modules/
+frontend/node_modules/
+.angular/
+frontend/.angular/
+dist/
+frontend/dist/
+backend/bin/
+backend/obj/
+backend/publish/
+.vs/
+.vscode/
+*.user
+*.lock
