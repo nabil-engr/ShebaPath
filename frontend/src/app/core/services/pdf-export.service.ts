@@ -13,97 +13,12 @@ const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 @Injectable({ providedIn: 'root' })
 export class PdfExportService {
   async exportGuide(guide: GuideDetail): Promise<void> {
-    const { default: JsPdf } = await import('jspdf');
-    const doc = new JsPdf({ unit: 'mm', format: 'a4' });
-    let y = this.drawHeader(doc, guide.category);
-
-    y = this.drawTitle(doc, guide.title, y);
-    y = this.drawParagraph(doc, guide.summary, y, { italic: true, color: MUTED });
-    y += 4;
-
-    // Key facts
-    const facts: [string, string | null][] = [
-      ['Fees', guide.fees],
-      ['Processing time', guide.processingTime],
-      ['Where to go', guide.office],
-      ['Last verified', this.formatDate(guide.lastVerified)],
-    ];
-    y = this.drawFactBox(doc, facts, y);
-    y += 6;
-
-    y = this.drawSectionHeading(doc, 'Steps to apply', y);
-    y = this.drawNumberedList(doc, guide.steps, y);
-    y += 4;
-
-    y = this.drawSectionHeading(doc, "What you'll need", y);
-    y = this.drawBulletList(doc, guide.requirements, y);
-
-    this.drawFooter(doc);
-    doc.save(`${guide.slug}-shebapath-guide.pdf`);
+    if (typeof window !== 'undefined') {
+      window.print();
+    }
   }
 
   async exportBlogPost(post: BlogDetail): Promise<void> {
-    const { default: JsPdf } = await import('jspdf');
-    const doc = new JsPdf({ unit: 'mm', format: 'a4' });
-    let y = this.drawHeader(doc, 'Blog');
-
-    y = this.drawTitle(doc, post.title, y);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9.5);
-    doc.setTextColor(...MUTED);
-    doc.text(this.formatDate(post.publishedAt), MARGIN, y);
-    y += 8;
-
-    const paragraphs = post.content.split(/\n+/).filter((p) => p.trim().length > 0);
-    for (const para of paragraphs) {
-      y = this.drawParagraph(doc, para, y);
-      y += 3;
-    }
-
-    this.drawFooter(doc);
-    doc.save(`${post.slug}-shebapath-blog.pdf`);
-  }
-
-  // ---------- drawing helpers ----------
-
-  private drawHeader(doc: jsPDF, tag: string): number {
-    doc.setFillColor(...BRAND_DARK);
-    doc.rect(0, 0, PAGE_WIDTH, 22, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(15);
-    doc.text('ShebaPath', MARGIN, 14);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.text('Bangladesh Government Service Guides', MARGIN, 19);
-
-    doc.setFillColor(...BRAND_GREEN);
-    doc.roundedRect(PAGE_WIDTH - MARGIN - 28, 6, 28, 9, 2, 2, 'F');
-    doc.setFontSize(8);
-    doc.setTextColor(255, 255, 255);
-    doc.text(tag.toUpperCase(), PAGE_WIDTH - MARGIN - 14, 11.5, { align: 'center' });
-
-    return 34;
-  }
-
-  private drawTitle(doc: jsPDF, title: string, y: number): number {
-    doc.setTextColor(...INK);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    const lines = doc.splitTextToSize(title, CONTENT_WIDTH);
-    doc.text(lines, MARGIN, y);
-    return y + lines.length * 7 + 3;
-  }
-
-  private drawSectionHeading(doc: jsPDF, text: string, y: number): number {
-    y = this.ensureSpace(doc, y, 12);
-    doc.setTextColor(...BRAND_GREEN);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12.5);
-    doc.text(text, MARGIN, y);
-    doc.setDrawColor(...BRAND_GREEN);
-    doc.setLineWidth(0.4);
-    doc.line(MARGIN, y + 1.5, MARGIN + 20, y + 1.5);
     return y + 8;
   }
 

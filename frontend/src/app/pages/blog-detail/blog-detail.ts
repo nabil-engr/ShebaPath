@@ -63,9 +63,8 @@ export class BlogDetailPage implements OnInit {
   }
 
   downloadPdf(): void {
-    const post = this.post();
-    if (post) {
-      this.pdfExport.exportBlogPost(post);
+    if (typeof window !== 'undefined') {
+      window.print();
     }
   }
 }

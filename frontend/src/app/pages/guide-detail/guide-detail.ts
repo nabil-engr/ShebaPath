@@ -82,9 +82,8 @@ export class GuideDetailPage implements OnInit {
   }
 
   downloadPdf(): void {
-    const guide = this.guide();
-    if (guide) {
-      this.pdfExport.exportGuide(guide);
+    if (typeof window !== 'undefined') {
+      window.print();
     }
   }
 }

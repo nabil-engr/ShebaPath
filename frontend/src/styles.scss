@@ -305,3 +305,73 @@ html.translated-rtl body {
   font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
   line-height: 1.85;
 }
+
+/* Print Stylesheet (Optimized for Ctrl+P / Window Print) */
+@media print {
+  .site-header,
+  .site-footer,
+  .action-buttons,
+  .back-link,
+  .home-search,
+  .slide-nav,
+  .slide-dots,
+  .pagination,
+  .skip-link,
+  .skiptranslate,
+  #google_translate_element {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .container, .page {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    break-inside: avoid;
+  }
+
+  .content-grid {
+    display: block !important;
+  }
+
+  .content-grid .block {
+    margin-bottom: 20px !important;
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #000000 !important;
+  }
+
+  h1, h2, h3, h4 {
+    color: #013220 !important;
+    break-after: avoid;
+  }
+
+  .fact-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    margin: 16px 0 !important;
+  }
+
+  .fact {
+    flex: 1 1 30% !important;
+    border: 1px solid #dddddd !important;
+    border-left: 4px solid #0a6b3e !important;
+    padding: 8px 12px !important;
+  }
+}
+
