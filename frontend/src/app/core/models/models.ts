@@ -22,6 +22,11 @@ export interface GuideSummary {
   isPublished?: boolean;
 }
 
+export interface GuideFaq {
+  question: string;
+  answer: string;
+}
+
 export interface GuideDetail extends GuideSummary {
   categoryId?: number;
   steps: string[];
@@ -29,6 +34,7 @@ export interface GuideDetail extends GuideSummary {
   keywords?: string | null;
   metaDescription?: string | null;
   featuredImage?: string | null;
+  faqs?: GuideFaq[];
 }
 
 export interface BlogSummary {

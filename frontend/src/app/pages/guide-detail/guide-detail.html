@@ -85,6 +85,26 @@
       </div>
     </div>
 
+    @if (faqs().length) {
+      <div class="faq-section">
+        <h2>সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)</h2>
+        <p class="faq-intro">আবেদন প্রক্রিয়া, ফি এবং প্রয়োজনীয় তথ্যাদি সম্পর্কিত জরুরি প্রশ্নের সহজ উত্তর:</p>
+        <div class="faq-list">
+          @for (faq of faqs(); track faq.question) {
+            <details class="card faq-item">
+              <summary class="faq-question">
+                <span>{{ faq.question }}</span>
+                <span class="faq-icon" aria-hidden="true">▾</span>
+              </summary>
+              <div class="faq-answer">
+                <p>{{ faq.answer }}</p>
+              </div>
+            </details>
+          }
+        </div>
+      </div>
+    }
+
     @if (relatedGuides().length) {
       <div class="related-section">
         <h2>Related guides</h2>

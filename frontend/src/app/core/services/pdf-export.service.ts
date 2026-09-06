@@ -19,7 +19,7 @@ export class PdfExportService {
   }
 
   async exportBlogPost(post: BlogDetail): Promise<void> {
-    return y + 8;
+    return;
   }
 
   private drawParagraph(

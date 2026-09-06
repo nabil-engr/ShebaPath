@@ -31,41 +31,121 @@ export class SeoService {
   applyGuide(guide: GuideDetail): void {
     const description = guide.metaDescription || guide.summary;
     const path = `/guides/${encodeURIComponent(guide.slug)}`;
+    const pageUrl = this.canonicalUrl(path);
     this.setPage({ title: `${guide.title} — ${SITE_NAME}`, description }, path, 'article');
 
     const keywords = guide.keywords || guide.tags?.join(', ');
     if (keywords) this.meta.updateTag({ name: 'keywords', content: keywords });
     this.setImage(guide.featuredImage);
+
+    // Multi-schema structured data: HowTo + FAQPage (if faqs present) + BreadcrumbList
+    const graph: any[] = [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: this.canonicalUrl('/'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Guides',
+            item: this.canonicalUrl('/guides'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: guide.title,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        '@type': 'HowTo',
+        name: guide.title,
+        description,
+        datePublished: guide.publishedAt,
+        dateModified: guide.lastVerified,
+        mainEntityOfPage: pageUrl,
+        step: guide.steps.map((text, index) => ({
+          '@type': 'HowToStep',
+          position: index + 1,
+          text,
+        })),
+        ...(guide.featuredImage ? { image: guide.featuredImage } : {}),
+      },
+    ];
+
+    if (guide.faqs && guide.faqs.length > 0) {
+      graph.push({
+        '@type': 'FAQPage',
+        mainEntity: guide.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      });
+    }
+
     this.setStructuredData({
       '@context': 'https://schema.org',
-      '@type': 'HowTo',
-      name: guide.title,
-      description,
-      datePublished: guide.publishedAt,
-      dateModified: guide.lastVerified,
-      mainEntityOfPage: this.canonicalUrl(path),
-      step: guide.steps.map((text, index) => ({
-        '@type': 'HowToStep',
-        position: index + 1,
-        text,
-      })),
-      ...(guide.featuredImage ? { image: guide.featuredImage } : {}),
+      '@graph': graph,
     });
   }
 
   applyBlog(post: BlogDetail): void {
     const path = `/blog/${encodeURIComponent(post.slug)}`;
+    const pageUrl = this.canonicalUrl(path);
     this.setPage({ title: `${post.title} — ${SITE_NAME} Blog`, description: post.excerpt }, path, 'article');
+    if (post.tags && post.tags.length > 0) {
+      this.meta.updateTag({ name: 'keywords', content: post.tags.join(', ') });
+    }
     this.setImage(post.coverImageUrl);
+
+    const graph: any[] = [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: this.canonicalUrl('/'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Blog',
+            item: this.canonicalUrl('/blog'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.publishedAt,
+        mainEntityOfPage: pageUrl,
+        publisher: { '@type': 'Organization', name: SITE_NAME },
+        ...(post.coverImageUrl ? { image: post.coverImageUrl } : {}),
+      },
+    ];
+
     this.setStructuredData({
       '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: post.title,
-      description: post.excerpt,
-      datePublished: post.publishedAt,
-      mainEntityOfPage: this.canonicalUrl(path),
-      publisher: { '@type': 'Organization', name: SITE_NAME },
-      ...(post.coverImageUrl ? { image: post.coverImageUrl } : {}),
+      '@graph': graph,
     });
   }
 
