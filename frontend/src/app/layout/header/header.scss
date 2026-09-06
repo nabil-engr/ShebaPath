@@ -1,43 +1,51 @@
 .site-header {
-  background: var(--color-white);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+  transition: all var(--transition-fast);
 }
 
 .bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
-  gap: 24px;
+  height: 76px;
+  gap: 28px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: var(--color-ink);
+  transition: opacity var(--transition-fast);
 
   &:hover {
     text-decoration: none;
+    opacity: 0.9;
   }
 }
 
 .brand-mark {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1.15;
 
   strong {
-    font-size: 1.05rem;
-    color: var(--color-green-900);
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: var(--color-green-950);
+    letter-spacing: -0.02em;
   }
 
   .accent {
@@ -45,49 +53,59 @@
   }
 
   small {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--color-ink-soft);
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 
   a {
     color: var(--color-ink);
     font-weight: 600;
-    font-size: 0.92rem;
+    font-size: 0.94rem;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
 
     &:hover {
       color: var(--color-green-700);
+      background: var(--color-green-50);
       text-decoration: none;
     }
 
     &.active {
       color: var(--color-green-700);
+      background: var(--color-green-100);
     }
   }
 
   .btn {
     font-size: 0.88rem;
-    padding: 8px 16px;
+    padding: 8px 18px;
+    border-radius: 999px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .bar {
     height: auto;
     flex-direction: column;
     align-items: flex-start;
-    padding: 14px 20px;
-    gap: 12px;
+    padding: 14px 18px;
+    gap: 14px;
   }
 
   .nav {
     width: 100%;
     justify-content: flex-start;
+    gap: 10px;
   }
 }
+

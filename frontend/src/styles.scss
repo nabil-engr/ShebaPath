@@ -1,19 +1,39 @@
-/* Global styles */
+/* Global styles & Modern Theme Tokens */
 :root {
+  --color-green-950: #022015;
   --color-green-900: #013220;
+  --color-green-800: #064e2d;
   --color-green-700: #0a6b3e;
   --color-green-600: #10874c;
   --color-green-500: #14a05a;
-  --color-red-600: #d32e2e;
-  --color-ink: #1c2321;
-  --color-ink-soft: #4a5550;
-  --color-paper: #fbfaf6;
-  --color-paper-dim: #f1efe6;
-  --color-border: #e2ddc9;
+  --color-green-100: #e8f7ee;
+  --color-green-50:  #f2faf5;
+
+  --color-red-600: #dc2626;
+  --color-red-100: #fee2e2;
+
+  --color-ink: #111827;
+  --color-ink-soft: #4b5563;
+  --color-muted: #6b7280;
+  --color-paper: #f8faf9;
+  --color-paper-dim: #f1f5f2;
+  --color-border: #e2e8e4;
+  --color-border-subtle: #edf2ee;
   --color-white: #ffffff;
-  --shadow-card: 0 1px 2px rgba(1, 50, 32, 0.06), 0 6px 20px rgba(1, 50, 32, 0.06);
-  --radius: 10px;
-  --font-sans: 'Inter', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 4px 6px -1px rgba(1, 50, 32, 0.05), 0 2px 4px -2px rgba(1, 50, 32, 0.04);
+  --shadow-hover: 0 14px 28px -4px rgba(1, 50, 32, 0.12), 0 8px 12px -4px rgba(1, 50, 32, 0.06);
+  --shadow-lg: 0 20px 35px -5px rgba(1, 50, 32, 0.15), 0 10px 15px -5px rgba(1, 50, 32, 0.08);
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --font-sans: 'Inter', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -28,6 +48,7 @@ html, body {
 
 html {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -35,28 +56,32 @@ body {
   color: var(--color-ink);
   background: var(--color-paper);
   -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4 {
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.25;
   margin: 0 0 0.5em;
   color: var(--color-green-900);
+  letter-spacing: -0.015em;
 }
 
 p {
   margin: 0 0 1em;
   color: var(--color-ink-soft);
-  line-height: 1.6;
+  line-height: 1.68;
 }
 
 a {
   color: var(--color-green-700);
   text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--color-green-600);
+  text-decoration: none;
 }
 
 button {
@@ -74,15 +99,17 @@ select:focus-visible {
 
 .skip-link {
   position: fixed;
-  top: 8px;
-  left: 8px;
+  top: 12px;
+  left: 12px;
   z-index: 1000;
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
   background: var(--color-white);
   color: var(--color-green-900);
   font-weight: 700;
-  transform: translateY(-150%);
+  transform: translateY(-200%);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-smooth);
 }
 
 .skip-link:focus {
@@ -102,7 +129,11 @@ select:focus-visible {
 }
 
 .status-message {
-  padding: 20px 0;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,48 +151,59 @@ select:focus-visible {
 
 .container {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 8px;
-  padding: 11px 20px;
+  border-radius: 10px;
+  padding: 11px 22px;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: transform 0.05s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 .btn-primary {
   background: var(--color-green-600);
   color: var(--color-white);
+  box-shadow: 0 3px 10px rgba(16, 135, 76, 0.25);
 }
 
 .btn-primary:hover {
   background: var(--color-green-700);
-  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(16, 135, 76, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
-  background: transparent;
+  background: var(--color-white);
   border-color: var(--color-border);
   color: var(--color-green-900);
 }
 
 .btn-outline:hover {
   background: var(--color-paper-dim);
-  text-decoration: none;
+  border-color: var(--color-green-500);
+  color: var(--color-green-800);
 }
 
 .btn-danger {
@@ -169,65 +211,76 @@ select:focus-visible {
   color: var(--color-white);
 }
 
+/* Cards */
 .card {
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(16, 135, 76, 0.3);
+  transform: translateY(-3px);
 }
 
 .field {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .field label {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--color-green-900);
 }
 
 .field input, .field textarea {
   font-family: inherit;
-  font-size: 0.95rem;
-  padding: 10px 12px;
-  border-radius: 8px;
+  font-size: 0.96rem;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
   background: var(--color-white);
   color: var(--color-ink);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .field input:focus, .field textarea:focus {
-  outline: 2px solid var(--color-green-500);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--color-green-600);
+  box-shadow: 0 0 0 3px rgba(16, 135, 76, 0.15);
 }
 
 .error-banner {
-  background: #fdecec;
-  border: 1px solid #f4b8b8;
+  background: var(--color-red-100);
+  border: 1px solid #f87171;
   color: var(--color-red-600);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
 }
 
 .tag {
-  display: inline-block;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--color-green-700);
-  background: rgba(16, 135, 76, 0.1);
+  color: var(--color-green-800);
+  background: var(--color-green-100);
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 4px 12px;
+  border: 1px solid rgba(16, 135, 76, 0.15);
 }
 
-// Google Translate: hide its default top banner/iframe so our own
-// "বাংলায় দেখুন" button is the only visible translation control.
+/* Google Translate Widget & Bangla typography */
 .goog-te-banner-frame,
 #goog-gt-tt,
 .goog-te-balloon-frame {
@@ -240,10 +293,6 @@ body {
   display: none !important;
 }
 
-// Better rendering for Bangla text (site's own Bengali content, and text
-// injected by the Google Translate widget) — force the Hind Siliguri font
-// and give it more line-height, since Bangla conjuncts need extra vertical
-// space to stay readable.
 :lang(bn),
 font[style*='vertical-align'] {
   font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif !important;

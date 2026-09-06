@@ -456,3 +456,203 @@ ON CONFLICT (slug) DO UPDATE SET
     cover_image_url = EXCLUDED.cover_image_url,
     tags = EXCLUDED.tags;
 
+-- ==============================================================================
+-- 5. ADDITIONAL 2026 GUIDES (Vehicle Fitness, RJSC, Sanchayapatra, Land Registry)
+-- ==============================================================================
+
+INSERT INTO tags (name, slug) VALUES
+    ('Tax Token', 'tax-token'),
+    ('Vehicle Fitness', 'vehicle-fitness'),
+    ('RJSC', 'rjsc'),
+    ('Company Registration', 'company-registration'),
+    ('Sanchayapatra', 'sanchayapatra'),
+    ('National Savings', 'national-savings'),
+    ('Sub-Registry', 'sub-registry'),
+    ('Land Deed', 'land-deed')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO bd_guides (slug, category_id, title, summary, steps, requirements, fees, processing_time, office, keywords, meta_description, is_featured, is_published, last_verified)
+VALUES
+(
+    'brta-vehicle-fitness-tax-token-renewal',
+    (SELECT id FROM categories WHERE slug = 'transport'),
+    'BRTA Motor Vehicle Fitness & Tax Token Online Renewal (2026)',
+    'How to book vehicle fitness inspection appointments and pay annual advance income tax (AIT) and tax token fees online through BRTA BSP.',
+    '[
+        "Log in to the BRTA Service Portal (bsp.brta.gov.bd) and link your vehicle registration number.",
+        "Check outstanding fines, route permits, or road tax dues before initiating renewal.",
+        "Select ''Vehicle Fitness Appointment'' and choose your regional BRTA circle / Vehicle Inspection Centre (VIC) date slot.",
+        "Pay the government fitness fee, annual road tax, and Advance Income Tax (AIT) online via bKash, cards, or partner banks.",
+        "Download and print the computer-generated Tax Token with payment QR-code immediately.",
+        "Drive the vehicle to the appointed BRTA test lane for mechanical inspection (brake test, emission, lights, chassis stamp verification).",
+        "Upon inspector approval, receive your digital Fitness Certificate with validity updated in the central registry."
+    ]'::jsonb,
+    '[
+        "Original Vehicle Registration Certificate (Smart Card / Blue Book).",
+        "Previous Fitness Certificate and Tax Token receipts.",
+        "Proof of annual Advance Income Tax (AIT) or updated e-TIN / e-Return submission acknowledgement.",
+        "For commercial vehicles: Valid Route Permit and digital speed governor compliance certificate."
+    ]'::jsonb,
+    'Varies by vehicle engine capacity: Motorbike Tax Token: ৳2,300 (2 years) / ৳11,500 (10 years). Private car (up to 1500cc): Fitness ৳828 + Tax Token ৳25,000 AIT + Road tax ৳2,875 annually. Late surcharge applies per month of delay.',
+    'Tax token issued instantly online; Fitness certificate issued same day after lane inspection passes.',
+    'BRTA Circle Inspection Centre (VIC) / Metro Circle Office',
+    'brta tax token, vehicle fitness certificate, bsp tax payment, ait car tax, motor fitness appointment',
+    'Learn how to renew BRTA vehicle fitness and tax token online in Bangladesh. Fee tables by engine cc, appointment booking, and inspection checklists.',
+    false,
+    true,
+    CURRENT_DATE
+),
+(
+    'rjsc-private-limited-company-registration',
+    (SELECT id FROM categories WHERE slug = 'business'),
+    'How to Register a Private Limited Company Online via RJSC (2026)',
+    'Comprehensive walkthrough for company Name Clearance, MoA/AoA preparation, digital signature, and Certificate of Incorporation from RJSC Bangladesh.',
+    '[
+        "Visit the Registrar of Joint Stock Companies and Firms portal (roc.gov.bd) and create a user account.",
+        "Apply for ''Name Clearance'' for your proposed company name and pay the ৳230 fee online; approval typically takes 24 hours.",
+        "Draft the Memorandum of Association (MoA) and Articles of Association (AoA) outlining shareholder objectives and capital clauses.",
+        "Fill out online digital incorporation forms: Form I (Declaration), Form VI (Notice of Situation), Form IX (Consent of Directors), and Form XII (Particulars of Directors).",
+        "Pay government registration stamp duty and filing fees via online A-Challan / credit card based on authorized share capital.",
+        "RJSC scrutinizes submitted documents; clarify queries if requested by the Assistant Registrar.",
+        "Download the digitally signed Certificate of Incorporation, Form XII, and certified MoA/AoA."
+    ]'::jsonb,
+    '[
+        "Minimum 2 and maximum 50 shareholders/directors (for Private Limited).",
+        "Valid NID and 12-digit e-TIN for all Bangladeshi resident directors; valid passports for foreign directors.",
+        "Approved Name Clearance Certificate from RJSC.",
+        "Drafted MoA and AoA signed by all subscribing directors.",
+        "Registered office address proof (commercial tenancy agreement)."
+    ]'::jsonb,
+    'Name Clearance: ৳230. Government incorporation fee depends on authorized capital: roughly ৳15,000–৳25,000 for ৳10 Lakhs authorized capital (including stamp duties, filing fees, and certified copy charges).',
+    'Typically 3 to 7 working days following fee payment and formal document submission.',
+    'Registrar of Joint Stock Companies and Firms (RJSC) — Dhaka/Chattogram/Rajshahi/Khulna',
+    'rjsc company registration, name clearance bd, roc gov bd, private limited incorporation, moa aoa bangladesh',
+    'Step-by-step guide to incorporating a Private Limited Company in Bangladesh online via RJSC. Name clearance, registration fees, and legal checklists.',
+    false,
+    true,
+    CURRENT_DATE
+),
+(
+    'national-savings-certificates-sanchayapatra-guide',
+    (SELECT id FROM categories WHERE slug = 'tax'),
+    'How to Buy National Savings Certificates (Sanchayapatra) Online & Bank Rules',
+    'Rules, interest rates, investment ceilings, and mandatory documents for Family Savings, 3-Month Profit, and Pensioner Sanchayapatra in Bangladesh.',
+    '[
+        "Select your suitable scheme: Poribar Sanchayapatra (women only), 3-Month Profit Basis, Pensioner, or 5-Year Bangladesh Sanchayapatra.",
+        "Obtain the official purchase form from Bangladesh Bank counters, National Savings Bureaus, or designated commercial bank branches.",
+        "Provide applicant NID, e-TIN certificate, and proof of income tax return submission (PSR) if investing over ৳5 Lakhs.",
+        "Provide applicant operational bank account routing number and bank MICR cheque for the investment amount.",
+        "Provide nominee(s) NID, 2 passport photographs, and designated share percentage.",
+        "Submit the application; bank validates National ID via central NSD online database.",
+        "Receive Sanchayapatra script or electronic receipt; monthly or quarterly profit is credited directly to your bank account via BEFTN."
+    ]'::jsonb,
+    '[
+        "Applicant Smart NID card and recent photographs.",
+        "12-digit e-TIN and Proof of Submission of Return (PSR) acknowledgment slip (compulsory above ৳5 Lakhs).",
+        "MICR cheque drawn on applicant personal bank account (cash purchases above ৳50,000 prohibited).",
+        "Nominee NID copy and 2 passport-size photographs.",
+        "For Pensioner scheme: Certified retirement clearance and PPO documents."
+    ]'::jsonb,
+    'No application or processing fees. Tax at source (TDS): 5% deducted from profit for investments up to ৳5 Lakhs; 10% TDS deducted for investments above ৳5 Lakhs.',
+    'Same-day issuance or 1–2 working days depending on cheque clearance via automated clearing house (BACPS).',
+    'Department of National Savings, Bangladesh Bank, Post Offices, and Scheduled Commercial Banks',
+    'sanchayapatra bangladesh, poribar sanchayapatra, savings certificate interest rate, national savings directorate',
+    'Complete guide to buying Bangladeshi Sanchayapatra. Investment limits, required tax return documents (PSR), latest interest rates, and profit payment process.',
+    false,
+    true,
+    CURRENT_DATE
+),
+(
+    'land-deed-registration-sub-registry-guide',
+    (SELECT id FROM categories WHERE slug = 'land-property'),
+    'Land Sale Deed Registration (Dalil) Process & Government Tax Rates (2026)',
+    'Important steps, registry stamp duty, local government taxes, and Sub-Registry office procedures for buying and registering real estate property in Bangladesh.',
+    '[
+        "Perform title verification: Inspect RS/City Survey Khatian, CS/SA lineage, updated LD Tax (Khajna), and non-encumbrance certificate (NEC) at the Sub-Registry office.",
+        "Have an authorized deed writer (দলিল লেখক) draft the sale deed (Bikroy Kabala) accurately specifying Mouza rate and plot boundaries.",
+        "Calculate and pay statutory government registration fees, stamp duty, capital gains tax, and local council tax via e-Challan.",
+        "Both buyer and seller (along with two witnesses and an identifier) appear in person before the Sub-Registrar.",
+        "Complete biometric thumbprint and live photo registration in the Sub-Registry automated system.",
+        "Sub-Registrar inspects original deeds, verifies seller legal title, and executes official registration.",
+        "Receive the certified Receipt (Rashid / ৫২ ধারা রশিদ) and collect the original registered deed when notified."
+    ]'::jsonb,
+    '[
+        "Original title deeds of seller and chain (Via) deeds.",
+        "Latest Mutation Khatian (e-Namjari) in seller name with updated Land Tax (Khajna) receipt.",
+        "NID cards of buyer, seller, witnesses, and deed identifier.",
+        "e-TIN and Proof of Submission of Return (PSR) of seller and buyer.",
+        "Official e-Challan payment slips for registration fee, stamp duty, and local taxes."
+    ]'::jsonb,
+    'Inside City Corporation: Registration Fee 1%, Stamp Duty 1.5%, Local Govt Tax 2–3%, Source Tax (Gain Tax) 8–10% of deed value or Mouza rate (whichever is higher). Outside City areas: Total taxes generally range around 8–9% of deed value.',
+    'Deed execution done on the same day; delivery of original certified registered deed takes 3 to 6 months.',
+    'Directorate of Registration — District / Upazila Sub-Registry Office',
+    'land registry bd, dalil registration, sub registry office fee, stamp duty bangladesh, bikroy kabala deed',
+    'Learn how to register a land or flat sale deed in Bangladesh. Complete breakdown of 2026 stamp duty, gain tax rates, document verification, and Sub-Registry steps.',
+    false,
+    true,
+    CURRENT_DATE
+)
+ON CONFLICT (slug) DO UPDATE SET
+    category_id = EXCLUDED.category_id,
+    title = EXCLUDED.title,
+    summary = EXCLUDED.summary,
+    steps = EXCLUDED.steps,
+    requirements = EXCLUDED.requirements,
+    fees = EXCLUDED.fees,
+    processing_time = EXCLUDED.processing_time,
+    office = EXCLUDED.office,
+    keywords = EXCLUDED.keywords,
+    meta_description = EXCLUDED.meta_description,
+    is_featured = EXCLUDED.is_featured,
+    is_published = EXCLUDED.is_published,
+    last_verified = CURRENT_DATE;
+
+INSERT INTO guide_tags (guide_id, tag_id)
+SELECT g.id, t.id FROM bd_guides g, tags t
+WHERE (g.slug = 'brta-vehicle-fitness-tax-token-renewal' AND t.slug IN ('tax-token', 'vehicle-fitness', 'brta'))
+   OR (g.slug = 'rjsc-private-limited-company-registration' AND t.slug IN ('rjsc', 'company-registration', 'trade-license'))
+   OR (g.slug = 'national-savings-certificates-sanchayapatra-guide' AND t.slug IN ('sanchayapatra', 'national-savings', 'tin'))
+   OR (g.slug = 'land-deed-registration-sub-registry-guide' AND t.slug IN ('sub-registry', 'land-deed', 'mutation'))
+ON CONFLICT DO NOTHING;
+
+-- ==============================================================================
+-- 6. ADDITIONAL BLOG POSTS
+-- ==============================================================================
+
+INSERT INTO bd_blog_posts (slug, title, excerpt, content, cover_image_url, tags, published_at)
+VALUES
+(
+    'proof-of-submission-of-tax-return-psr-mandatory-services',
+    'What Is PSR (Proof of Submission of Return) and Why Do You Need It in Bangladesh?',
+    'Understanding the mandatory 40+ public and private services in Bangladesh that now require tax return submission proof.',
+    E'The government of Bangladesh has significantly broadened the requirement for Proof of Submission of Return (PSR) under the Income Tax Act.\n\n### What Exactly Is PSR?\n\nPSR is the formal acknowledgment receipt generated upon filing your annual income tax return (either through the online etaxnbr.gov.bd platform or physical tax circles). Having just a 12-digit TIN is no longer enough.\n\n### Top Services Requiring Mandatory PSR\n\n1. **Banking & Credit**: Applying for a bank loan or credit card exceeding ৳5,00,000.\n2. **Property Transactions**: Registering land, flats, or deeds within City Corporation, Pourashava, or Cantonment board limits.\n3. **Trade Licensing**: Obtaining or renewing any municipal or Union Parishad trade license.\n4. **Vehicle Ownership**: Purchasing, registering, or renewing fitness/tax tokens of any motor car, SUV, or microbus.\n5. **National Savings Certificates**: Purchasing Sanchayapatra or opening postal savings accounts exceeding ৳5,00,000.\n6. **Utility Connections**: Getting new commercial electricity or gas connections.\n\nKeeping your online e-Return certificate downloaded on your phone ensures zero disruption when visiting financial or government institutions.',
+    null,
+    '["Income Tax", "NBR", "PSR", "Tax Compliance", "Banking"]'::jsonb,
+    now()
+),
+(
+    'how-to-verify-land-ownership-before-buying-bangladesh',
+    '7 Critical Documents You Must Verify Before Buying Any Land in Bangladesh',
+    'A practical legal checklist to avoid property fraud, disputed titles, and forged Khatiyan records before executing a land sale deed.',
+    E'Buying property in Bangladesh is a major financial milestone, but fraud caused by counterfeit deeds and manipulated records remains a risk. Protect your investment by systematically demanding these 7 documents:\n\n### 1. CS, SA, RS, and City Survey Khatiyan\nTrace the land lineage from the original Cadastral Survey (CS) to State Acquisition (SA), Revisional Survey (RS), and current City Survey (where applicable). Ensure there is an unbroken chain of title.\n\n### 2. Successive Via Deeds (বায়া দলিল)\nEvery registered sale deed through which the property transferred ownership over the last 30 years must be inspected.\n\n### 3. Updated e-Namjari Mutation Khatian & DCR\nThe seller must possess an approved Mutation Khatian in their own name. Never buy land based only on a previous generation''s deed without mutation.\n\n### 4. Digital Land Development Tax (e-Khajna) Dakhila\nCheck on ldtax.gov.bd that all annual taxes are cleared up to the current Bengali calendar year.\n\n### 5. Non-Encumbrance Certificate (NEC / ১২ ধারা নির্দায় সার্টিফিকেট)\nObtain an NEC from the local Sub-Registry office proving the property is not mortgaged to a bank or pledged elsewhere.\n\n### 6. Master Plan & Zoning Approval\nVerify with RAJUK, CDA, KDA, or local master plans that the land is not designated for canals, flood flow zones, or government road widening acquisitions.\n\n### 7. Physical Demarcation & Possession\nEnsure physical possession matches the plot boundaries indicated on the Mouza sheet.',
+    null,
+    '["Land & Property", "Land Law", "Due Diligence", "e-Namjari"]'::jsonb,
+    now()
+),
+(
+    'epassport-delivery-status-tracking-codes-explained',
+    'e-Passport Application Status Codes Explained: From Enrolment to Ready for Issuance',
+    'A decoder for every status message on epassport.gov.bd so you know exactly where your passport is in the production pipeline.',
+    E'After finishing your biometric appointment at the regional passport office, tracking your application online at epassport.gov.bd helps you understand its exact progress. Here is what the official system status codes mean:\n\n- **Submitted**: Your online application is registered in the central system awaiting biometric capture.\n- **Enrolment in Progress**: You attended the office, and your photo, fingerprints, and iris data have been captured.\n- **Pending Police Verification**: Your application has been sent to the Special Branch (SB) or local police for background verification.\n- **Police Verification in Progress**: An investigating officer has been assigned to verify your home address and record.\n- **Pending Approval**: The Assistant Director (AD) or Deputy Director at the Passport Office is reviewing your verified dossier.\n- **Sent for Personalization**: The application was approved and sent to the central automated printing press in Dhaka.\n- **Personalized**: Your smart e-Passport chip has been encoded and physically printed.\n- **Shipped**: The passport is in transit from the central printing press to your local regional office.\n- **Ready for Issuance**: Your passport has arrived at your regional passport office counter. You can now visit with your delivery slip to collect it!\n\nWhen visiting for collection, bring your original delivery slip and original NID/Birth Certificate.',
+    null,
+    '["e-Passport", "Travel", "DIP", "Tracking"]'::jsonb,
+    now()
+)
+ON CONFLICT (slug) DO UPDATE SET
+    title = EXCLUDED.title,
+    excerpt = EXCLUDED.excerpt,
+    content = EXCLUDED.content,
+    cover_image_url = EXCLUDED.cover_image_url,
+    tags = EXCLUDED.tags;
+
+
